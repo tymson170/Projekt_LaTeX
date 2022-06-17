@@ -1,0 +1,170 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{amsmath, amsfonts}
+\usepackage{indentfirst}
+\usepackage[pdfborder={0 0 0 0}]{hyperref}
+\usepackage{graphics}
+\usepackage[nofoot,hdivide={2cm,*,2cm},vdivide={2cm,*,2cm}]{geometry}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{array,ragged2e}
+\usepackage{notoccite}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\tikzset{
+	startstop/.style = {draw, rectangle, rounded corners,
+		minimum width=3cm, minimum height=1cm, text centered,
+		draw=black, fill=red!30},
+	dzialanie/.style = {draw, rectangle, minimum
+		width=3cm, minimum height=1cm, text centered, text
+		width=3cm, draw=black, fill=orange!30},
+	warunek/.style = {draw, diamond, minimum
+		width=3cm, minimum height=1cm, text centered,
+		draw=black, aspect=2, fill=green!30},
+	arrow/.style = {->, >=stealth', shorten >=1pt},
+	point/.style = {coordinate}
+}
+\frenchspacing
+\setcounter{page}{1}
+
+\author{Tymoteusz Romanowicz}
+\title{Ciąg Fibonacciego}
+\date{\today}
+
+
+
+\begin{document}
+	\maketitle
+	
+	
+	
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{Wprowadzenie}
+Ciąg Fibonacciego – ciąg liczb naturalnych\cite{Liczby_naturalne} określony rekurencyjnie w sposób następujący: \\\\
+\qquad Pierwszy wyraz jest równy 0, drugi jest równy 1, każdy następny jest sumą dwóch poprzednich. \\
+Formalnie:
+ \begin{equation}
+ 	\setlength{\arraycolsep}{0pt}
+ 	F_{n}:=\left\{ \begin{array}{ l l }
+ 		0~dla~n=0; \\
+ 		1~dla~n=1; \\
+ 		F_{n-1}+F_{n-2}~dla~n>1
+  	\end{array} \right.
+ \end{equation}
+Kolejne wyrazy tego ciągu nazywane są liczbami Fibonacciego\cite{Fibonacci}. Zaliczanie zera do elementów ciągu Fibonacciego zależy od umowy – część autorów definiuje ciąg od $F_{1}=F_{2}=1$.
+
+	\section{Wykres dla kilku pierwszych wartości ciągu Fibonacciego}\label{preliminaria}
+		
+	\definecolor{uuuuuu}{rgb}{0.26666666666666666,0.26666666666666666,0.26666666666666666}
+	\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, scale=0.4]
+		\begin{axis}[
+			x=1cm,y=1cm,
+			axis lines=middle,
+			xmin=-15.215134748918972,
+			xmax=23.095647230995297,
+			ymin=-4.874390829074461,
+			ymax=25.737573719469566,
+			xtick={-14,-12,...,22},
+			ytick={-4,-2,...,24},]
+			\clip(-15.215134748918972,-4.874390829074461) rectangle (23.095647230995297,25.737573719469566);
+			\begin{scriptsize}
+				\draw [fill=uuuuuu] (0,0) circle (2pt);
+				\draw [fill=uuuuuu] (1,1) circle (2pt);
+				\draw [fill=uuuuuu] (2,1) circle (2pt);
+				\draw [fill=uuuuuu] (3,2) circle (2pt);
+				\draw [fill=uuuuuu] (4,3) circle (2pt);
+				\draw [fill=uuuuuu] (5,5) circle (2pt);
+				\draw [fill=uuuuuu] (6,8) circle (2pt);
+				\draw [fill=uuuuuu] (7,13) circle (2pt);
+				\draw [fill=uuuuuu] (8,21) circle (2pt);
+				\draw [fill=uuuuuu] (0,0) circle (2pt);
+				\draw [fill=uuuuuu] (1,1) circle (2pt);
+				\draw [fill=uuuuuu] (2,1) circle (2pt);
+				\draw [fill=uuuuuu] (3,2) circle (2pt);
+				\draw [fill=uuuuuu] (4,3) circle (2pt);
+				\draw [fill=uuuuuu] (5,5) circle (2pt);
+				\draw [fill=uuuuuu] (6,8) circle (2pt);
+				\draw [fill=uuuuuu] (7,13) circle (2pt);
+				\draw [fill=uuuuuu] (8,21) circle (2pt);
+			\end{scriptsize}
+		\end{axis}
+	\end{tikzpicture}
+
+\begin{table}[hp]
+	\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+		\hline
+		\rowcolor[HTML]{F8F9FA} 
+		\multicolumn{1}{|c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{0}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{1}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{2}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{3}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{4}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{5}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{6}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{7}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{8}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{9}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{10}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{11}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{12}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{13}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{14}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{15}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{16}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{17}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{18}$}} & \multicolumn{1}{c|}{\cellcolor[HTML]{F8F9FA}{\color[HTML]{202122} $F_{19}$}} \\ \hline
+		0                                                                            & 1                                                                           & 1                                                                           & 2                                                                           & 3                                                                           & 5                                                                           & 8                                                                           & 13                                                                          & 21                                                                          & 34                                                                          & 55                                                                           & 89                                                                           & 144                                                                          & 233                                                                          & 377                                                                          & 610                                                                          & 987                                                                          & 1597                                                                         & 2584                                                                         & 4181                                                                         \\ \hline
+	\end{tabular}
+\end{table}
+\newpage
+	
+	\section{Schemat\cite{Schemat_blokowy} wyznaczania liczb ciągu Fibonacciego dla $F_{n}, n>0$}\label{preliminaria}
+	
+	\begin{tikzpicture}[node distance=5mm, every
+		node/.style={font=\footnotesize}]
+		\node (start) [startstop] {Start};
+		\node (step1) [dzialanie, below=of start] {Podaj n};
+		\node (step2) [warunek, below=of step1, scale=1.4] {n$\leq$2};
+		\node (step3a) [dzialanie, below left=of step2] {$F_{n}=1$};
+		\node (step3b) [dzialanie, below right=of step2] {i=3 \\ $F_{1}=1$ \\ $F_{2}=1$\\$F_{n}=0$};
+		\node (step4) [warunek, below=of step3b, scale=1.2] {i$\leq$n};
+		\node (step5) [dzialanie, below right=of step4] {$F_{n}=F_{1}+F_{2}$\\$F_{1}=F_{2}$\\$F_{2}=F_{n}$};
+		\node (step6) [dzialanie, below=of step3a, below=2.3cm] {Wypisz $F_{n}$};
+		\node (step7) [startstop, below=of step6] {Koniec};
+		
+		\draw [arrow] (start) -- (step1);
+		\draw [arrow] (step1) -- (step2);
+		\draw [arrow] (step2) -| (step3a);
+		\draw [arrow] (step2) -| (step3b);
+		\draw [arrow] (step4) -| (step5);
+		\draw [arrow] (step3b) -- (step4);
+		\draw [arrow] (step3a) -- (step6);
+		\draw [arrow] (step6) -- (step7);
+		\draw [arrow] (step5) -- (step6);
+		
+	\end{tikzpicture}
+
+Schemat prosi użytkownika o liczbę n większą od zera, jeżeli podana jest ona mniejsza od dwa, schemat od razu oświadcza, że liczba $F_{n}$ jest równa 1, natomiast jeżeli jest większa od 2, wykonują się rachunki w pętli prowadzące do uzyskania oczekiwanego wyniku.
+	
+	\section{Ciąg Fibonacciego w świecie}\label{preliminaria}
+	
+	\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=blue!40, 
+		level 1/.append style={level distance=5cm,sibling angle=90},
+		level 2/.append style={level distance=3cm,sibling angle=45},]
+		\node{Ciąg \\Fibonacciego w świecie}
+		child { node {Przyroda}
+			child { node {Rozwinięte kwiaty}}
+			child { node {Muszle}}
+			child { node {Ciało człowieka}}
+			child { node {Spirale DNA}}
+		}
+		child { node {Muzyka}
+			child { node {Zależności pomiędzy poszczególnymi dźwiękami}}
+			child { node {Zakres dźwięków słyszalnych}}
+			child { node {Interwały oparte na liczbie fi\cite{Phi}}}
+		}
+		child { node {Architektura}
+			child { node {Partenon}}
+			child { node {Piramidy}}
+			child { node {Obrazy (Mona Lisa, Ostatnia Wieczerza)}}
+			child { node {Znane marki (Apple, Toyota, Pepsi, Google)}}
+		}
+		child { node {Religia}
+		};
+		
+	\end{tikzpicture}
+	
+\bibliographystyle{ieeetr}
+\bibliography{literatura}
+
+\end{document}
